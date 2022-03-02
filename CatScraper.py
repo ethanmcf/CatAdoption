@@ -1,26 +1,13 @@
 from selenium import webdriver
+from EmailHandler import EmailHandler
+from db_manager import DBManager
 import time
-import smtplib
 
-EMAIL_ADDRESS = ''
-PASSWORD = ''
-already_seen = {}
+EMAIL_HANDLER = EmailHandler()
+DB_MANAGER = DBManager()
 
-
-def check_seen_already(name):
-    #check if cat has been seen on website
-    try:
-        already_seen[name]
-    #if not, add to seen list
-    except:
-        already_seen[name] = "seen"
-        return False
-    #return true so it is not added to message
-    else:
-        return True
-
-while True:
-    time.sleep(3600)
+if 1 == 1:
+    #time.sleep(3600)
     try:
         message = f'Subject: New cats up for adoption!\n\n Hey McFamily, new cats were posted for adoption:'
         URL = 'https://petharbor.com/search.asp?searchtype=ADOPT&bgcolor=639ace&text=ffffff&link=FEFF81&alink=FF814A&vlink=FEFF81&col_hdr_bg=004d84&col_hdr_fg=efeff7&col_bg=004d84&col_fg=ffffff&SBG=004d84&rows=10&imght=120&imgres=thumb&view=sysadm.v_animal_short&fontface=tahoma&zip=80443&miles=10&shelterlist=%27TRNT1%27,%27TRNT%27,%27TRNT2%27,%27TRNT3%27,%27TRNT4%27,%27TRNT5%27'
@@ -62,26 +49,22 @@ while True:
                     age = cat_info[6].text
                     location = cat_info[7].text
 
-                    if check_seen_already(name) == False:
+                    if DB_MANAGER.is_seen(name) == False:
                         counter += 1
                         message += "\n\n#{}: {} is a {} coloured {}. {} is a {} {} who is located at {}. {}'s code: {}".format(counter, name, breed, color, name, age, gender, location, name, code)
-           
+                        DB_MANAGER.add_to_seen(name)
+
             if counter != 0:
-                with smtplib.SMTP('smtp.gmail.com',587) as smtp:
-                    smtp.ehlo()
-                    smtp.starttls()
-                    smtp.ehlo()
+                email_list = ['ethan_mcfarland@outlook.com']#,'scottmcf@bell.net','highland_las@hotmail.com']
+                for email in email_list:
+                    EMAIL_HANDLER.send_email(message,email)
 
-                    smtp.login(EMAIL_ADDRESS, PASSWORD)
-
-                    email_list = ['','','']
-                    for email in email_list:
-                        smtp.sendmail(EMAIL_ADDRESS, email, message)
             else:
                 print("no cats")
 
     finally:
         time.sleep(1)
         BROWSER.quit()
+
 
 
