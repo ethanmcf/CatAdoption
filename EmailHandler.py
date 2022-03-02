@@ -2,8 +2,8 @@ import smtplib
 
 class EmailHandler:
     def __init__(self):
-        self.EMAIL_ADDRESS = 'ethanmcf2@gmail.com'
-        self.PASSWORD = 'Hellsatins7&'
+        self.EMAIL_ADDRESS = ''
+        self.PASSWORD = ''
 
     def send_email(self, message, reciver):
         with smtplib.SMTP('smtp.gmail.com',587) as smtp:

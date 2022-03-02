@@ -6,6 +6,7 @@ import time
 EMAIL_HANDLER = EmailHandler()
 DB_MANAGER = DBManager()
 
+print("Started")
 while True:
     time.sleep(3600)
     try:
@@ -55,12 +56,15 @@ while True:
                         DB_MANAGER.add_to_seen(name)
 
             if counter != 0:
-                email_list = ['ethan_mcfarland@outlook.com']#,'scottmcf@bell.net','highland_las@hotmail.com']
+                print("--------------------")
+                print("CATS HAVE BEEN ADDED")
+                print("--------------------")
+                email_list = ['']
                 for email in email_list:
                     EMAIL_HANDLER.send_email(message,email)
 
             else:
-                print("no cats")
+                print("Completed cycle, no cats")
 
     finally:
         time.sleep(1)
