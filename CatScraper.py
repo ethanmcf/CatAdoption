@@ -6,8 +6,8 @@ import time
 EMAIL_HANDLER = EmailHandler()
 DB_MANAGER = DBManager()
 
-if 1 == 1:
-    #time.sleep(3600)
+while True:
+    time.sleep(3600)
     try:
         message = f'Subject: New cats up for adoption!\n\n Hey McFamily, new cats were posted for adoption:'
         URL = 'https://petharbor.com/search.asp?searchtype=ADOPT&bgcolor=639ace&text=ffffff&link=FEFF81&alink=FF814A&vlink=FEFF81&col_hdr_bg=004d84&col_hdr_fg=efeff7&col_bg=004d84&col_fg=ffffff&SBG=004d84&rows=10&imght=120&imgres=thumb&view=sysadm.v_animal_short&fontface=tahoma&zip=80443&miles=10&shelterlist=%27TRNT1%27,%27TRNT%27,%27TRNT2%27,%27TRNT3%27,%27TRNT4%27,%27TRNT5%27'
