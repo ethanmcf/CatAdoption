@@ -2,8 +2,8 @@ from selenium import webdriver
 import time
 import smtplib
 
-EMAIL_ADDRESS = 'ethanmcf2@gmail.com'
-PASSWORD = 'Hellsatins7&'
+EMAIL_ADDRESS = ''
+PASSWORD = ''
 already_seen = {}
 
 
@@ -76,8 +76,7 @@ for i in range(0,2):
                     print("new cats")
                     email_list = ['ethan_mcfarland@outlook.com','scottmcf@bell.net','highland_las@hotmail.com']
                     for email in email_list:
-                        done = ""
-                        #smtp.sendmail(EMAIL_ADDRESS, email, message)
+                        smtp.sendmail(EMAIL_ADDRESS, email, message)
             else:
                 print("no cats")
 
