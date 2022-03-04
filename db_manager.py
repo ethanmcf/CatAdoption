@@ -4,7 +4,7 @@ import sqlite3
 
 class DBManager:
     def __init__(self):
-        self.conn = sqlite3.connect(('seen_cats.db'))
+        self.conn = sqlite3.connect('seen_cats.db')
         self.cur = self.conn.cursor()
     
     def add_to_seen(self,name):
@@ -15,14 +15,14 @@ class DBManager:
         self.cur.execute("SELECT * FROM cats WHERE name= '{}'".format(name))
         query = self.cur.fetchone()
         self.conn.commit()
+        
         if query == None:
             return False
         return True
 
-    
 
-    def finish(self):
-        self.conn.commit()
-        self.conn.close()
+
+
+
 
 
