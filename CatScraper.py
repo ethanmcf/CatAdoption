@@ -27,6 +27,7 @@ while cycle_count != -1:
         BROWSER = webdriver.Chrome(PATH, options=option)
         BROWSER.get(URL)
         
+
         #Select cats and submit choice
         cat_radio_button = BROWSER.find_element_by_xpath('/html/body/form/div/center/table/tbody/tr[2]/td[1]/p[3]/font/input')
         cat_radio_button.click()
@@ -45,6 +46,8 @@ while cycle_count != -1:
         else:
             counter = 0
             available_cats = cat_table.find_elements_by_css_selector('tr')
+            
+            
             #iterate through each cats row
             for i in range(0, len(available_cats)):
                 #first row returns table definitions, so skip
@@ -59,14 +62,10 @@ while cycle_count != -1:
                     breed = cat_info[5].text
                     age = cat_info[6].text
                     location = cat_info[7].text
-
-                    #Click on cat to get url and image
-                    available_cats[i].find_element_by_css_selector('a').click()
-                    time.sleep(1)
-                    links.append(BROWSER.current_url)
                     
                     if DB_MANAGER.is_seen(name) == False:
                         counter += 1
+                        links.append(available_cats[i].find_element_by_css_selector('[href]').get_attribute('href'))
                         messages.append("#{}: {} is a {} coloured {}. {} is a {} {} who is located at {}. {}'s code: {}".format(counter, name, breed, color, name, age, gender, location, name, code))
                         DB_MANAGER.add_to_seen(name)
 

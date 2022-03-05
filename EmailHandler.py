@@ -1,11 +1,13 @@
+from email import message
+from pyexpat.errors import messages
 import smtplib
 from email.message import EmailMessage
 
 class EmailHandler:
     def __init__(self):
-        self.EMAIL_ADDRESS = 'ethanmcf2@gmail.com'
-        self.PASSWORD = 'Hellsatins7&'
-        self.contacts = ['ethan_mcfarland@outlook.com','scottmcf@bell.net','highland_las@hotmail.com']
+        self.EMAIL_ADDRESS = ''
+        self.PASSWORD = ''
+        self.contacts = ['']
 
     def send_email(self, cat_messages, links):
         msg = EmailMessage()
